@@ -106,14 +106,14 @@ title: "[Brief Summary] SpikFormer: When Spiking Neural Network Meets Transforme
 
 ### 3.1. Vanilla Self Attention (VSA)
 - 부동소수점 행렬 Query, Key, Value이 학습 가능한 선형 행렬 (W<sub>Q</sub>, W<sub>K</sub>, W<sub>V</sub>)에 의해 프로젝션됨.
-- `Q = XW<sub>Q</sub>`, `K = XW<sub>K</sub>`, `V = XW<sub>V</sub>`
+- Q = XW<sub>Q</sub>, K = XW<sub>K</sub>, V = XW<sub>V</sub>
 - 소프트맥스 활성화 함수를 사용하여 정규화.
 - 부동소수점 행렬곱과 소프트맥스 함수는 지수 연산과 나눗셈 연산을 포함하므로 SNN의 저전력 특성과 맞지 않음.
 - Query와 Key의 내적에 필요한 연산량은 O(N^2)이며, 메모리 사용량도 O(N^2)임.
 
 ### 3.2. Spiking Self Attention (SSA)
 - 스파이크 행렬 Query, Key, Value가 VSA처럼 프로젝션 된 후, 배치 정규화가 이루어지고, 스파이크 시퀀스로 변환됨.
-- `Q = SN<sub>Q</sub>(BN(XW<sub>Q</sub>))`, `K = SN<sub>K</sub>(BN(XW<sub>K</sub>))`, `V = SN<sub>V</sub>(BN(XW<sub>V</sub>))`
+- Q = SN<sub>Q</sub>(BN(XW<sub>Q</sub>)), K = SN<sub>K</sub>(BN(XW<sub>K</sub>)), V = SN<sub>V</sub>(BN(XW<sub>V</sub>))
 - 음수 값을 만들지 않기 때문에 정규화를 위한 소프트맥스 활성화 함수 제거.
 - Q, K, V를 직접 곱하는 방법을 채택하여 관련 있는 특징에 집중.
 - Q, K, V가 모두 스파이크 행렬이기 때문에 행렬곱 대신 논리게이트 AND연산과 덧셈 연산만으로 attention 맵 계산이 가능.
