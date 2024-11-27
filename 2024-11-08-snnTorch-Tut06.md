@@ -41,7 +41,7 @@ lif = snn.Leaky(beta, spike_grad)
 
 
 
-# 2. Define the Network for CSNN (Convolutional SNN) 
+# II. Define the Network for CSNN (Convolutional SNN) 
 - 사용할 합성곱 신경망 아키텍처: 12C5-MP2-64C5-MP2-1024FC10
 1. 12C5: 12개의 5x5 합성곱 커널 필터, 12개의 특징 맵 형성.
 2. MP2: 2x2 max-pooling 함수.
@@ -74,7 +74,7 @@ CSNN = nn.Sequential(nn.Conv2d(1, 12, 5),          // 64x24x24
 
 
 
-# 3. Forward propagation을 통한 타임스텝 반복
+# III. Forward propagation을 통한 타임스텝 반복
 
 - 네트워크 클래스 외부에 `forward_prop` 함수를 정의함으로써 타임스텝 반복과 데이터 누적을 쉽게 처리.
 - 각 타임스텝의 출력 결과를 `spk_rec`과 `mem_rec`에 저장하여 이후 학습이나 분석에 활용.
@@ -91,7 +91,7 @@ for step in range(num_steps):
 
 
 
-# 4. snntorch.Functional을 이용한 손실함수 계산
+# IV. snntorch.Functional을 이용한 손실함수 계산
 
 ### 3.1. tut5에서는 뉴런 막전위와 목표 간 차이를 이용하여 CE를 계산.
 - 뉴런이 정확한 시점에서 발화하도록 최적화.
@@ -107,7 +107,7 @@ loss = snntorch.Functional.ce_rate_loss()
 
 
 
-# 5. Additional Experiences
+# V. Additional Experiences
 - 다음 네트워크는 tut6에서 진행한 모델보다 더 높은 정확도를 보임. (85% &rightarrow; 97%)
 - `beta = 0.5 &rightarrow 0.9` 외의 하이퍼 파라미터 유지.
 - 사용한 신경망 아키텍처: 32C5-MP2-64C5-MP2-1024FC256-256FC10
